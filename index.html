@@ -820,16 +820,6 @@
         if (currentFormat === 'rgb') return `rgb(${r}, ${g}, ${b})`;
         if (currentFormat === 'hsl') return rgbToHsl(r, g, b);
     }
-    function colorName(r, g, b) {
-        const l = (Math.max(r, g, b) + Math.min(r, g, b)) / 2 / 255, s = Math.max(r, g, b) - Math.min(r, g, b);
-        if (s < 30) return l < 0.25 ? 'siyah' : l > 0.75 ? 'beyaz' : 'gri';
-        if (r > g && r > b) return b > g * 0.8 ? 'pembe' : 'kırmızı';
-        if (g > r && g > b) return r > b ? 'sarı-yeşil' : 'yeşil';
-        if (b > r && b > g) return r > g ? 'mor' : 'mavi';
-        if (r > b && g > b) return 'sarı';
-        return 'nötr';
-    }
-
     function renderPalette() {
         paletteGrid.innerHTML = '';
         paletteSection.style.display = 'block';
@@ -839,7 +829,7 @@
             const [r, g, b] = rgb, hex = rgbToHex(r, g, b), value = formatColor(rgb);
             const chip = document.createElement('div');
             chip.className = 'color-chip';
-            chip.innerHTML = `<div class="chip-swatch" style="background:${hex};"><div class="chip-copy-hint">kopyala</div><span class="chip-copied" id="copied-${i}">✓ kopyalandı</span></div><div class="chip-info"><div class="chip-hex" id="chip-val-${i}">${value}</div><div class="chip-label">${colorName(r, g, b)}</div></div>`;
+            chip.innerHTML = `<div class="chip-swatch" style="background:${hex};"><div class="chip-copy-hint">kopyala</div><span class="chip-copied" id="copied-${i}">✓ kopyalandı</span></div><div class="chip-info"><div class="chip-hex" id="chip-val-${i}">${value}</div></div>`;
             chip.addEventListener('click', () => {
                 navigator.clipboard.writeText(document.getElementById(`chip-val-${i}`).textContent).then(() => {
                     const badge = document.getElementById(`copied-${i}`);
