@@ -1,3 +1,5 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PaletSnap</title>
 <link rel="icon" type="image/x-icon" href="paletsnap.ico?v=2">
 <style>
@@ -26,6 +28,7 @@
         background: #1c1510;
         min-height: 100vh;
         padding: 0;
+        overflow-x: hidden;
     }
 
     .app {
@@ -120,6 +123,10 @@
         text-align: center;
         margin-left: auto;
         margin-right: auto;
+    }
+
+    .mobile-break {
+        display: inline;
     }
 
     .hero-desc {
@@ -495,8 +502,8 @@
         }
 
         .app {
-            min-height: 100vh;
-            padding: 0.95rem 0.8rem 1.6rem;
+            min-height: auto;
+            padding: 0.95rem 0.8rem 0.9rem;
         }
 
         .logo-nav {
@@ -515,10 +522,15 @@
             margin-top: 0.25rem;
         }
 
+        .mobile-break {
+            display: block;
+        }
+
         .hero-desc {
-            margin-top: 0.65rem;
-            font-size: 11px;
-            line-height: 1.6;
+            margin-top: 1rem;
+            margin-bottom: 0.95rem;
+            font-size: 12.5px;
+            line-height: 1.72;
             max-width: 95%;
         }
 
@@ -601,6 +613,7 @@
         .empty-state {
             padding: 1.5rem 0.75rem 1.1rem;
             border-radius: 12px;
+            margin-bottom: 0;
         }
 
         .empty-icon {
@@ -628,7 +641,7 @@
 
     @media (max-width: 420px) {
         .app {
-            padding: 0.85rem 0.65rem 1.4rem;
+            padding: 0.85rem 0.65rem 0.8rem;
         }
 
         .palette-grid {
@@ -649,7 +662,7 @@
                     <div class="logo">Palet<span>Snap</span></div>
                 </button>
             </div>
-            <h1 class="hero-title">Her görselden profesyonel bir renk paleti çıkar.</h1>
+            <h1 class="hero-title"><span class="mobile-break">Her görselden</span> <span class="mobile-break">profesyonel bir</span> <span class="mobile-break">renk paleti çıkar.</span></h1>
             <p class="hero-desc">Görselini sürükle bırak ya da seç, baskın renkleri anında ayır ve tek dokunuşla kopyala. Hızlı, net ve tasarım odaklı bir akış.</p>
         </div>
 
