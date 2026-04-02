@@ -1,0 +1,850 @@
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Fraunces:ital,wght@0,400;0,700;0,900;1,400&display=swap');
+
+    :root {
+        --bg-main: #120d09;
+        --bg-card: #1c1510;
+        --bg-soft: #221a13;
+        --bg-soft-2: #241b14;
+        --line: #3a2a1e;
+        --line-soft: #2e2018;
+        --text-main: #f2ebe0;
+        --text-muted: #8a7060;
+        --text-dim: #6b5a47;
+        --accent: #e8824a;
+    }
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        background: #1c1510;
+        min-height: 100vh;
+        padding: 0;
+    }
+
+    .app {
+        font-family: 'Fraunces', serif;
+        background: #1c1510;
+        color: var(--text-main);
+        min-height: 100vh;
+        max-width: none;
+        margin: 0;
+        padding: 1.6rem 1.2rem 2.8rem;
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    .container {
+        max-width: 1080px;
+        margin: 0 auto;
+    }
+
+    .logo {
+        font-family: 'Fraunces', serif;
+        font-size: clamp(30px, 5vw, 44px);
+        font-weight: 900;
+        letter-spacing: -1px;
+        color: var(--text-main);
+    }
+
+    .logo-btn {
+        background: transparent;
+        border: 0;
+        color: inherit;
+        cursor: pointer;
+        display: block;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        transform: translateY(-2px);
+        transition: transform 0.16s ease, opacity 0.16s ease;
+    }
+
+    .logo-btn:hover {
+        transform: translateY(-1px);
+        opacity: 0.95;
+    }
+
+
+    .logo span {
+        color: var(--accent);
+        font-style: italic;
+    }
+
+    .tagline {
+        font-family: 'Space Mono', monospace;
+        font-size: 10px;
+        color: var(--text-dim);
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-top: 3px;
+    }
+
+    .header {
+        margin-bottom: 1.4rem;
+        max-width: 820px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .logo-nav {
+        width: 100vw;
+        margin-left: calc(50% - 50vw);
+        margin-right: calc(50% - 50vw);
+        margin-top: -6px;
+        border-bottom: 1px solid #2d2017;
+        height: 74px;
+        padding: 0 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1.2rem;
+        background: #1c1510;
+        position: relative;
+    }
+
+    .hero-title {
+        font-size: clamp(28px, 5.4vw, 54px);
+        font-weight: 400;
+        line-height: 1.05;
+        margin-top: 0.6rem;
+        max-width: 760px;
+        letter-spacing: -0.02em;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero-desc {
+        margin-top: 0.85rem;
+        color: #a18671;
+        max-width: 640px;
+        font-family: 'Space Mono', monospace;
+        font-size: 12px;
+        line-height: 1.7;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .drop-zone {
+        border: 1.5px dashed var(--line);
+        border-radius: 16px;
+        padding: 3rem 2rem;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.24s ease;
+        position: relative;
+        background: linear-gradient(180deg, #241b14 0%, var(--bg-soft) 100%);
+        margin: 1.4rem auto 1.1rem;
+        max-width: 820px;
+        box-shadow: 0 14px 34px rgba(0, 0, 0, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.03);
+    }
+
+    .drop-zone.drag-over {
+        border-color: var(--accent);
+        background: #2d2115;
+        transform: translateY(-2px) scale(1.004);
+        box-shadow: 0 0 0 1px rgba(232, 130, 74, 0.35), 0 20px 45px rgba(0, 0, 0, 0.4), 0 0 34px rgba(232, 130, 74, 0.14);
+    }
+
+    .drop-zone.has-image {
+        padding: 0;
+        border-style: solid;
+        border-color: var(--line);
+        overflow: hidden;
+    }
+
+    .drop-icon {
+        font-size: 38px;
+        margin-bottom: 14px;
+        opacity: 0.55;
+        color: #f0be96;
+    }
+
+    .drop-text {
+        font-size: 14px;
+        color: var(--text-dim);
+        font-family: 'Space Mono', monospace;
+    }
+
+    .drop-text strong {
+        color: var(--accent);
+    }
+
+    .select-btn {
+        margin-top: 1rem;
+        border: none;
+        border-radius: 11px;
+        padding: 10px 18px;
+        background: linear-gradient(135deg, #f09b61 0%, #e8824a 58%, #d66e37 100%);
+        color: #20150e;
+        font-family: 'Space Mono', monospace;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.4px;
+        cursor: pointer;
+        transition: transform 0.18s, box-shadow 0.18s;
+        box-shadow: 0 8px 20px rgba(232, 130, 74, 0.26);
+    }
+
+    .select-btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 10px 24px rgba(232, 130, 74, 0.32);
+    }
+
+    #preview {
+        width: 100%;
+        max-height: 320px;
+        object-fit: cover;
+        display: block;
+        border-radius: 14px;
+    }
+
+    #file-input {
+        display: none;
+    }
+
+    .overlay-btn {
+        position: absolute;
+        bottom: 12px;
+        right: 12px;
+        background: rgba(28, 21, 16, 0.9);
+        border: 0.5px solid var(--line);
+        border-radius: 8px;
+        color: var(--text-muted);
+        font-family: 'Space Mono', monospace;
+        font-size: 11px;
+        padding: 6px 12px;
+        cursor: pointer;
+        transition: color 0.15s;
+    }
+
+    .overlay-btn:hover {
+        color: var(--accent);
+    }
+
+    .section-label {
+        font-family: 'Space Mono', monospace;
+        font-size: 10px;
+        color: #5f4b3a;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 12px;
+    }
+
+    .palette-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
+        gap: 12px;
+        margin-bottom: 2rem;
+    }
+
+    #palette-section {
+        max-width: 820px;
+        margin: 0 auto;
+    }
+
+    .color-chip {
+        border-radius: 12px;
+        overflow: hidden;
+        border: 0.5px solid var(--line-soft);
+        cursor: pointer;
+        transition: transform 0.15s, border-color 0.15s;
+        position: relative;
+    }
+
+    .color-chip:hover {
+        transform: translateY(-3px);
+        border-color: #664734;
+    }
+
+    .chip-swatch {
+        height: 80px;
+        position: relative;
+    }
+
+    .chip-copy-hint {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(28, 21, 16, 0.4);
+        opacity: 0;
+        transition: opacity 0.15s;
+        font-family: 'Space Mono', monospace;
+        font-size: 10px;
+        color: #fff;
+        letter-spacing: 1px;
+    }
+
+    .color-chip:hover .chip-copy-hint {
+        opacity: 1;
+    }
+
+    .chip-info {
+        background: #1d150f;
+        padding: 8px 10px;
+    }
+
+    .chip-hex {
+        font-family: 'Space Mono', monospace;
+        font-size: 12px;
+        color: #d8bc96;
+        font-weight: 700;
+        overflow-wrap: anywhere;
+    }
+
+    .chip-label {
+        font-size: 10px;
+        color: #6a5441;
+        margin-top: 2px;
+        font-family: 'Space Mono', monospace;
+    }
+
+    .chip-copied {
+        position: absolute;
+        top: 6px;
+        right: 6px;
+        background: var(--accent);
+        color: #1c1510;
+        font-family: 'Space Mono', monospace;
+        font-size: 9px;
+        font-weight: 700;
+        padding: 2px 6px;
+        border-radius: 4px;
+        opacity: 0;
+        transition: opacity 0.2s;
+    }
+
+    .formats-bar {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 1rem;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    .fmt-btn {
+        background: var(--bg-soft);
+        border: 0.5px solid var(--line);
+        border-radius: 6px;
+        color: var(--text-dim);
+        font-family: 'Space Mono', monospace;
+        font-size: 11px;
+        padding: 5px 12px;
+        cursor: pointer;
+        transition: all 0.15s;
+    }
+
+    .fmt-btn.active {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: #1c1510;
+        font-weight: 700;
+    }
+
+    .fmt-btn:hover:not(.active) {
+        border-color: #694934;
+        color: #cfb28f;
+    }
+
+    .copy-all-btn {
+        margin-left: auto;
+        background: transparent;
+        border: 0.5px solid var(--line);
+        border-radius: 6px;
+        color: var(--text-dim);
+        font-family: 'Space Mono', monospace;
+        font-size: 11px;
+        padding: 5px 14px;
+        cursor: pointer;
+        transition: all 0.15s;
+    }
+
+    .copy-all-btn:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+    }
+
+    .empty-state {
+        text-align: center;
+        padding: 2.2rem 1rem 1.8rem;
+        color: #7a614e;
+        font-family: 'Space Mono', monospace;
+        font-size: 12px;
+        border: 1px dashed #2f2118;
+        border-radius: 14px;
+        background: rgba(25, 18, 12, 0.45);
+        max-width: 820px;
+        margin: 0 auto;
+    }
+
+    .empty-icon {
+        font-size: 36px;
+        line-height: 1;
+        margin-bottom: 10px;
+    }
+
+    .empty-title {
+        color: #d8bc96;
+        font-size: 14px;
+        letter-spacing: 0.2px;
+    }
+
+    .empty-sub {
+        margin-top: 7px;
+        color: #967b67;
+    }
+
+    .example-row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 9px;
+        margin-top: 14px;
+    }
+
+    .example-btn {
+        background: #18110c;
+        border: 1px solid #2b1d14;
+        border-radius: 10px;
+        overflow: hidden;
+        cursor: pointer;
+        transition: transform 0.18s, border-color 0.18s, box-shadow 0.18s;
+    }
+
+    .example-btn:hover {
+        transform: translateY(-2px);
+        border-color: #7d543b;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.28);
+    }
+
+    .example-btn img {
+        width: 100%;
+        height: 68px;
+        object-fit: cover;
+        display: block;
+    }
+
+    .example-btn:nth-child(2) img {
+        object-position: center 38%;
+    }
+
+    .empty-note {
+        margin-top: 7px;
+        font-size: 10px;
+        color: #7b6553;
+    }
+
+    .count-badge {
+        display: inline-block;
+        background: var(--bg-soft-2);
+        border: 0.5px solid var(--line);
+        border-radius: 99px;
+        font-family: 'Space Mono', monospace;
+        font-size: 10px;
+        color: var(--text-muted);
+        padding: 2px 8px;
+        margin-left: 8px;
+        vertical-align: middle;
+    }
+
+    .canvas-hidden {
+        display: none;
+    }
+
+    button:focus-visible,
+    .drop-zone:focus-visible,
+    .color-chip:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+    }
+
+    @media (max-width: 900px) {
+        .app {
+            padding: 1.25rem 0.95rem 2.2rem;
+        }
+
+        .header,
+        .drop-zone,
+        #palette-section,
+        .empty-state {
+            max-width: 100%;
+        }
+
+        .hero-title {
+            font-size: clamp(30px, 7.2vw, 42px);
+        }
+
+        .palette-grid {
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+        }
+    }
+
+    @media (max-width: 640px) {
+        body {
+            padding: 0;
+        }
+
+        .app {
+            min-height: 100vh;
+            padding: 0.95rem 0.8rem 1.6rem;
+        }
+
+        .logo-nav {
+            height: 62px;
+            margin-top: -2px;
+            margin-bottom: 0.95rem;
+        }
+
+        .logo {
+            font-size: clamp(28px, 9vw, 34px);
+        }
+
+        .hero-title {
+            font-size: clamp(24px, 8.4vw, 31px);
+            line-height: 1.13;
+            margin-top: 0.25rem;
+        }
+
+        .hero-desc {
+            margin-top: 0.65rem;
+            font-size: 11px;
+            line-height: 1.6;
+            max-width: 95%;
+        }
+
+        .drop-zone {
+            margin-top: 1rem;
+            border-radius: 14px;
+            padding: 1.6rem 0.85rem;
+        }
+
+        .drop-icon {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .drop-text {
+            font-size: 12px;
+        }
+
+        .select-btn {
+            width: 100%;
+            max-width: 240px;
+            padding: 9px 12px;
+        }
+
+        #preview {
+            max-height: 250px;
+        }
+
+        .overlay-btn {
+            bottom: 9px;
+            right: 9px;
+            font-size: 10px;
+            padding: 5px 10px;
+        }
+
+        .formats-bar {
+            gap: 6px;
+            margin-bottom: 0.8rem;
+        }
+
+        .section-label {
+            letter-spacing: 1.4px;
+        }
+
+        .fmt-btn {
+            font-size: 10px;
+            padding: 5px 10px;
+        }
+
+        .copy-all-btn {
+            margin-left: 0;
+            width: 100%;
+            margin-top: 2px;
+            padding: 8px 12px;
+            text-align: center;
+        }
+
+        .palette-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 9px;
+            margin-bottom: 1.4rem;
+        }
+
+        .chip-swatch {
+            height: 74px;
+        }
+
+        .chip-info {
+            padding: 7px 8px;
+        }
+
+        .chip-hex {
+            font-size: 11px;
+        }
+
+        .chip-label {
+            font-size: 9px;
+        }
+
+        .empty-state {
+            padding: 1.5rem 0.75rem 1.1rem;
+            border-radius: 12px;
+        }
+
+        .empty-icon {
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        .empty-title {
+            font-size: 13px;
+        }
+
+        .empty-sub {
+            font-size: 11px;
+        }
+
+        .example-row {
+            gap: 7px;
+            margin-top: 10px;
+        }
+
+        .example-btn img {
+            height: 60px;
+        }
+    }
+
+    @media (max-width: 420px) {
+        .app {
+            padding: 0.85rem 0.65rem 1.4rem;
+        }
+
+        .palette-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .drop-zone {
+            padding: 1.4rem 0.7rem;
+        }
+    }
+</style>
+
+<div class="app">
+    <div class="container">
+        <div class="header">
+            <div class="logo-nav">
+                <button class="logo-btn" id="logo-home-btn" type="button" aria-label="Ana menüye dön">
+                    <div class="logo">Palet<span>Snap</span></div>
+                </button>
+            </div>
+            <h1 class="hero-title">Her görselden profesyonel bir renk paleti çıkar.</h1>
+            <p class="hero-desc">Görselini sürükle bırak ya da seç, baskın renkleri anında ayır ve tek dokunuşla kopyala. Hızlı, net ve tasarım odaklı bir akış.</p>
+        </div>
+
+        <div class="drop-zone" id="drop-zone">
+            <div id="drop-content">
+                <div class="drop-icon">✦</div>
+                <div class="drop-text"><strong>Görsel yükle</strong> veya sürükle bırak</div>
+                <div class="drop-text" style="margin-top:6px; font-size:11px;">PNG · JPG · WEBP · SVG</div>
+                <button class="select-btn" id="select-btn" type="button">Görsel Seç</button>
+            </div>
+            <img id="preview" style="display:none;" />
+            <button class="overlay-btn" id="change-btn" style="display:none;">↺ değiştir</button>
+        </div>
+
+        <input type="file" id="file-input" accept="image/*" />
+        <canvas id="canvas" class="canvas-hidden"></canvas>
+
+        <div id="palette-section" style="display:none;">
+            <div class="formats-bar">
+                <span class="section-label" style="margin:0;">format</span>
+                <button class="fmt-btn active" data-fmt="hex">HEX</button>
+                <button class="fmt-btn" data-fmt="rgb">RGB</button>
+                <button class="fmt-btn" data-fmt="hsl">HSL</button>
+                <button class="copy-all-btn" id="copy-all-btn">↗ tümünü kopyala</button>
+            </div>
+            <div class="section-label">palet <span class="count-badge" id="color-count">0 renk</span></div>
+            <div class="palette-grid" id="palette-grid"></div>
+        </div>
+
+        <div class="empty-state" id="empty-state">
+            <div class="empty-icon">🎨</div>
+            <div class="empty-title">Henüz görsel yok</div>
+            <div class="empty-sub">Başlamak için bir görsel seç veya aşağıdaki örneklerden birine tıkla.</div>
+            <div class="example-row">
+                <button class="example-btn" type="button" data-src="image1.avif"><img src="image1.avif" alt="örnek görsel 1"></button>
+                <button class="example-btn" type="button" data-src="image2.avif"><img src="image2.avif" alt="örnek görsel 2"></button>
+                <button class="example-btn" type="button" data-src="image3.avif"><img src="image3.avif" alt="örnek görsel 3"></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const dropZone = document.getElementById('drop-zone');
+    const dropContent = document.getElementById('drop-content');
+    const fileInput = document.getElementById('file-input');
+    const selectBtn = document.getElementById('select-btn');
+    const logoHomeBtn = document.getElementById('logo-home-btn');
+    const preview = document.getElementById('preview');
+    const changeBtn = document.getElementById('change-btn');
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d', { willReadFrequently: true });
+    const paletteGrid = document.getElementById('palette-grid');
+    const paletteSection = document.getElementById('palette-section');
+    const emptyState = document.getElementById('empty-state');
+    const colorCount = document.getElementById('color-count');
+    const copyAllBtn = document.getElementById('copy-all-btn');
+    const exampleButtons = document.querySelectorAll('.example-btn');
+
+    let currentColors = [];
+    let currentFormat = 'hex';
+
+    dropZone.addEventListener('click', (e) => { if (e.target === changeBtn) return; fileInput.click(); });
+    selectBtn.addEventListener('click', (e) => { e.stopPropagation(); fileInput.click(); });
+    logoHomeBtn.addEventListener('click', resetToHome);
+    changeBtn.addEventListener('click', (e) => { e.stopPropagation(); fileInput.click(); });
+    fileInput.addEventListener('change', (e) => { if (e.target.files[0]) loadImage(e.target.files[0]); });
+    dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+    dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+    dropZone.addEventListener('drop', (e) => { e.preventDefault(); dropZone.classList.remove('drag-over'); if (e.dataTransfer.files[0]) loadImage(e.dataTransfer.files[0]); });
+    exampleButtons.forEach(btn => btn.addEventListener('click', () => loadImageFromUrl(btn.dataset.src)));
+
+    function loadImage(file) {
+        const url = URL.createObjectURL(file);
+        loadImageElement(url, true);
+    }
+
+    function loadImageFromUrl(url) {
+        loadImageElement(url, false);
+    }
+
+    function loadImageElement(url, revokeOnLoad) {
+        const img = new Image();
+        if (!revokeOnLoad) img.crossOrigin = 'anonymous';
+        img.onload = () => {
+            preview.src = url; preview.style.display = 'block';
+            dropContent.style.display = 'none';
+            dropZone.classList.add('has-image');
+            changeBtn.style.display = 'block';
+            extractColors(img);
+            if (revokeOnLoad) URL.revokeObjectURL(url);
+        };
+        img.src = url;
+    }
+
+    function resetToHome() {
+        preview.removeAttribute('src');
+        preview.style.display = 'none';
+        dropContent.style.display = 'block';
+        dropZone.classList.remove('has-image', 'drag-over');
+        changeBtn.style.display = 'none';
+        paletteSection.style.display = 'none';
+        emptyState.style.display = 'block';
+        colorCount.textContent = '0 renk';
+        currentColors = [];
+        fileInput.value = '';
+        currentFormat = 'hex';
+        document.querySelectorAll('.fmt-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.fmt === 'hex'));
+        copyAllBtn.textContent = '↗ tümünü kopyala';
+    }
+
+    function extractColors(img) {
+        const size = 120;
+        canvas.width = size; canvas.height = size;
+        ctx.drawImage(img, 0, 0, size, size);
+        let data;
+        try {
+            data = ctx.getImageData(0, 0, size, size).data;
+        } catch (err) {
+            // In case remote image blocks pixel access, keep app usable with a fallback palette.
+            currentColors = [[232, 130, 74], [189, 137, 94], [109, 90, 71], [54, 40, 30], [238, 183, 132]];
+            renderPalette();
+            return;
+        }
+        const buckets = {};
+        for (let i = 0; i < data.length; i += 4) {
+            const r = Math.round(data[i] / 32) * 32, g = Math.round(data[i + 1] / 32) * 32, b = Math.round(data[i + 2] / 32) * 32;
+            if (data[i + 3] < 128) continue;
+            const key = `${r},${g},${b}`;
+            buckets[key] = (buckets[key] || 0) + 1;
+        }
+        const sorted = Object.entries(buckets).sort((a, b) => b[1] - a[1]).slice(0, 30);
+        const chosen = [];
+        for (const [key] of sorted) {
+            const [r, g, b] = key.split(',').map(Number);
+            if (chosen.length >= 10) break;
+            const tooClose = chosen.some(c => { const dr = c[0] - r, dg = c[1] - g, db = c[2] - b; return Math.sqrt(dr * dr + dg * dg + db * db) < 60; });
+            if (!tooClose) chosen.push([r, g, b]);
+        }
+        currentColors = chosen;
+        renderPalette();
+    }
+
+    function rgbToHex(r, g, b) { return '#' + [r, g, b].map(v => v.toString(16).padStart(2, '0')).join('').toUpperCase(); }
+    function rgbToHsl(r, g, b) {
+        r /= 255; g /= 255; b /= 255;
+        const max = Math.max(r, g, b), min = Math.min(r, g, b);
+        let h, s, l = (max + min) / 2;
+        if (max === min) { h = s = 0; } else { const d = max - min; s = l > 0.5 ? d / (2 - max - min) : d / (max + min); switch (max) { case r: h = ((g - b) / d + (g < b ? 6 : 0)) / 6; break; case g: h = ((b - r) / d + 2) / 6; break; case b: h = ((r - g) / d + 4) / 6; break; } }
+        return `hsl(${Math.round(h * 360)}, ${Math.round(s * 100)}%, ${Math.round(l * 100)}%)`;
+    }
+    function formatColor(rgb) {
+        const [r, g, b] = rgb;
+        if (currentFormat === 'hex') return rgbToHex(r, g, b);
+        if (currentFormat === 'rgb') return `rgb(${r}, ${g}, ${b})`;
+        if (currentFormat === 'hsl') return rgbToHsl(r, g, b);
+    }
+    function colorName(r, g, b) {
+        const l = (Math.max(r, g, b) + Math.min(r, g, b)) / 2 / 255, s = Math.max(r, g, b) - Math.min(r, g, b);
+        if (s < 30) return l < 0.25 ? 'siyah' : l > 0.75 ? 'beyaz' : 'gri';
+        if (r > g && r > b) return b > g * 0.8 ? 'pembe' : 'kırmızı';
+        if (g > r && g > b) return r > b ? 'sarı-yeşil' : 'yeşil';
+        if (b > r && b > g) return r > g ? 'mor' : 'mavi';
+        if (r > b && g > b) return 'sarı';
+        return 'nötr';
+    }
+
+    function renderPalette() {
+        paletteGrid.innerHTML = '';
+        paletteSection.style.display = 'block';
+        emptyState.style.display = 'none';
+        colorCount.textContent = `${currentColors.length} renk`;
+        currentColors.forEach((rgb, i) => {
+            const [r, g, b] = rgb, hex = rgbToHex(r, g, b), value = formatColor(rgb);
+            const chip = document.createElement('div');
+            chip.className = 'color-chip';
+            chip.innerHTML = `<div class="chip-swatch" style="background:${hex};"><div class="chip-copy-hint">kopyala</div><span class="chip-copied" id="copied-${i}">✓ kopyalandı</span></div><div class="chip-info"><div class="chip-hex" id="chip-val-${i}">${value}</div><div class="chip-label">${colorName(r, g, b)}</div></div>`;
+            chip.addEventListener('click', () => {
+                navigator.clipboard.writeText(document.getElementById(`chip-val-${i}`).textContent).then(() => {
+                    const badge = document.getElementById(`copied-${i}`);
+                    badge.style.opacity = '1'; setTimeout(() => badge.style.opacity = '0', 1200);
+                });
+            });
+            paletteGrid.appendChild(chip);
+        });
+    }
+
+    document.querySelectorAll('.fmt-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.fmt-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active'); currentFormat = btn.dataset.fmt;
+            currentColors.forEach((rgb, i) => { const el = document.getElementById(`chip-val-${i}`); if (el) el.textContent = formatColor(rgb); });
+        });
+    });
+
+    copyAllBtn.addEventListener('click', () => {
+        if (!currentColors.length) return;
+        navigator.clipboard.writeText(currentColors.map(rgb => formatColor(rgb)).join('\n')).then(() => { copyAllBtn.textContent = '✓ kopyalandı'; setTimeout(() => copyAllBtn.textContent = '↗ tümünü kopyala', 1500); });
+    });
+</script>
